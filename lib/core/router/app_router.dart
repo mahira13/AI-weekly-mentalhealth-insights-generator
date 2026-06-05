@@ -1,24 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/home/presentation/pages/home_page.dart';
+import '../../features/insights/presentation/pages/insights_page.dart';
 import '../../features/journal/presentation/pages/journal_page.dart';
 import '../../features/journal/presentation/pages/timeline_page.dart';
-import '../../features/insights/presentation/pages/insights_page.dart';
 
 /// Named route paths used throughout the app.
 class AppRoutes {
   AppRoutes._();
 
-  static const String journal = '/';
+  static const String home = '/';
+  static const String journal = '/journal';
   static const String timeline = '/timeline';
   static const String insights = '/insights';
 }
 
 /// Configures [GoRouter] with all application routes.
 final GoRouter appRouter = GoRouter(
-  initialLocation: AppRoutes.journal,
+  initialLocation: AppRoutes.home,
   debugLogDiagnostics: false,
   routes: [
+    GoRoute(
+      path: AppRoutes.home,
+      name: 'home',
+      pageBuilder: (BuildContext context, GoRouterState state) =>
+          const NoTransitionPage(child: HomePage()),
+    ),
     GoRoute(
       path: AppRoutes.journal,
       name: 'journal',
