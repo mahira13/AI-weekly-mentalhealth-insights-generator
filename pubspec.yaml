@@ -1,0 +1,52 @@
+name: ai_mental_health_insights
+description: AI-powered weekly mental health insights generator with psychosis symptom tracking.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State management
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.5
+
+  # Navigation
+  go_router: ^13.2.0
+
+  # Local storage
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
+  # Charts
+  fl_chart: ^0.68.0
+
+  # HTTP client
+  http: ^1.2.1
+
+  # Environment variables
+  flutter_dotenv: ^5.1.0
+
+  # Dependency injection
+  get_it: ^7.6.7
+
+  # Utilities
+  intl: ^0.19.0
+  uuid: ^4.3.3
+
+flutter:
+  uses-material-design: true
+  assets:
+    - .env
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.9
+  bloc_test: ^9.1.7
+  mocktail: ^1.0.3
