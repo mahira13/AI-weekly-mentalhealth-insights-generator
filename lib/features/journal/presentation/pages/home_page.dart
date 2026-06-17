@@ -44,7 +44,7 @@ class _HomeView extends StatelessWidget {
                   const SizedBox(height: 24),
                   HomeWeekStrip(entries: entries),
                   const SizedBox(height: 28),
-                  const HomeLogTodayButton(),
+                  HomeLogTodayButton(entries: entries),
                   const SizedBox(height: 28),
                   HomeQuickActionCards(loggedDaysCount: entries.length),
                   const SizedBox(height: 24),

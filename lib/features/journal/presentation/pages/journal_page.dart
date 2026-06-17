@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/di/injection_container.dart';
-import '../../../../core/router/app_router.dart';
 import '../../../../core/theme/app_theme.dart';
 
 import '../bloc/journal_bloc.dart';
@@ -16,10 +14,7 @@ class JournalPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => sl<JournalBloc>()..add(const LoadWeeklyEntries()),
-      child: const _JournalView(),
-    );
+    return const _JournalView();
   }
 }
 
@@ -53,8 +48,7 @@ class _JournalView extends StatelessWidget {
                 duration: Duration(seconds: 2),
               ),
             );
-            // Navigate to home after saving
-            context.go(AppRoutes.home);
+            context.pop();
           }
           if (state is JournalError) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -73,22 +67,17 @@ class _JournalView extends StatelessWidget {
           final bloc = context.read<JournalBloc>();
           final draft = state.draft;
 
-          return 
-                  Container(
-                    width: double.infinity,
-                 margin: const EdgeInsets.all(24),
-                    child: ElevatedButton.icon(
-                      icon: const Icon(Icons.save_rounded),
-                      label: const Text('Save Today\'s Entry'),
-                      onPressed: state is JournalLoading
-                          ? null
-                          : () {
-                              final entry = bloc.buildEntryFromDraft(draft);
-                              bloc.add(SaveEntry(entry));
-                            },
-                    ),
-                  
-             
+          return Container(
+            width: double.infinity,
+            margin: const EdgeInsets.all(24),
+            child: ElevatedButton.icon(
+              icon: const Icon(Icons.save_rounded),
+              label: const Text('Save Today\'s Entry'),
+              onPressed: () {
+                final entry = bloc.buildEntryFromDraft(draft);
+                bloc.add(SaveEntry(entry));
+              },
+            ),
           );
         },
       ),

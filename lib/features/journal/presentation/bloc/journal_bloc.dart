@@ -113,9 +113,22 @@ class JournalBloc extends Bloc<JournalEvent, JournalState> {
 
   /// Convenience method to build a [JournalEntry] from the current draft.
   JournalEntry buildEntryFromDraft(JournalDraft draft) {
+    final current = state;
+    final today = DateTime.now();
+    JournalEntry? existingTodayEntry;
+
+    if (current is JournalLoaded) {
+      for (final entry in current.weeklyEntries) {
+        if (_isSameDate(entry.date, today)) {
+          existingTodayEntry = entry;
+          break;
+        }
+      }
+    }
+
     return JournalEntry(
-      id: _uuid.v4(),
-      date: DateTime.now(),
+      id: existingTodayEntry?.id ?? _uuid.v4(),
+      date: existingTodayEntry?.date ?? today,
       positiveSymptom: draft.positiveSymptom,
       negativeSymptom: draft.negativeSymptom,
       sleepQuality: draft.sleepQuality,
@@ -123,5 +136,11 @@ class JournalBloc extends Bloc<JournalEvent, JournalState> {
       socialEnergy: draft.socialEnergy,
       note: draft.note.trim(),
     );
+  }
+
+  bool _isSameDate(DateTime left, DateTime right) {
+    return left.year == right.year &&
+        left.month == right.month &&
+        left.day == right.day;
   }
 }
