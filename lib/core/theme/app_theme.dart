@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  // Kiso-aligned palette: calm, clinical, trustworthy
+  // color palette: calm, clinical, trustworthy
   static const Color primary = Color(0xFF2C6E8A); // deep teal
   static const Color primaryLight = Color(0xFFE8F4F8);
   static const Color accent = Color(0xFF5BA08A); // muted sage green
   static const Color warning = Color(0xFFE8944A); // amber warning
   static const Color danger = Color(0xFFD95F5F); // soft red
+  static const Color success = Color(0xFF5BA08A); // calm green
   static const Color surface = Color(0xFFF7F8FA);
   static const Color cardBg = Color(0xFFFFFFFF);
   static const Color textPrimary = Color(0xFF1A2332);
@@ -14,11 +15,16 @@ class AppTheme {
   static const Color border = Color(0xFFE2E8EF);
 
   // Symptom dimension colors
-  static const Color positiveSymptom = Color(0xFFD95F5F); // red-ish (elevated = bad)
-  static const Color negativeSymptom = Color(0xFF7B8FA8); // muted blue (withdrawal)
+  static const Color positiveSymptom =
+      Color(0xFFD95F5F); // red-ish (elevated = bad)
+  static const Color negativeSymptom =
+      Color(0xFF7B8FA8); // muted blue (withdrawal)
   static const Color sleepColor = Color(0xFF6B7FCC); // indigo
   static const Color stressColor = Color(0xFFE8944A); // amber
   static const Color socialColor = Color(0xFF5BA08A); // sage
+  static const Color sliderBad = danger;
+  static const Color sliderMedium = warning;
+  static const Color sliderGood = success;
 
   static ThemeData get light => ThemeData(
         useMaterial3: true,

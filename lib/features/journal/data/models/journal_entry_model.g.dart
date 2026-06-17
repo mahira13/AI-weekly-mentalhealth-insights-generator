@@ -19,12 +19,12 @@ class JournalEntryModelAdapter extends TypeAdapter<JournalEntryModel> {
     return JournalEntryModel(
       id: fields[0] as String,
       date: fields[1] as DateTime,
-      racingThoughts: fields[2] as double,
-      suspicion: fields[3] as double,
-      lowMotivation: fields[4] as double,
-      socialWithdrawal: fields[5] as double,
-      sleepHours: fields[6] as double,
-      stressLevel: fields[7] as double,
+      positiveSymptom: fields[2] as double,
+      negativeSymptom: fields[3] as double,
+      sleepQuality: fields[4] as double,
+      stressLevel: fields[5] as double,
+      socialEnergy: fields[6] as double,
+      note: fields[7] as String,
     );
   }
 
@@ -37,17 +37,17 @@ class JournalEntryModelAdapter extends TypeAdapter<JournalEntryModel> {
       ..writeByte(1)
       ..write(obj.date)
       ..writeByte(2)
-      ..write(obj.racingThoughts)
+      ..write(obj.positiveSymptom)
       ..writeByte(3)
-      ..write(obj.suspicion)
+      ..write(obj.negativeSymptom)
       ..writeByte(4)
-      ..write(obj.lowMotivation)
+      ..write(obj.sleepQuality)
       ..writeByte(5)
-      ..write(obj.socialWithdrawal)
+      ..write(obj.stressLevel)
       ..writeByte(6)
-      ..write(obj.sleepHours)
+      ..write(obj.socialEnergy)
       ..writeByte(7)
-      ..write(obj.stressLevel);
+      ..write(obj.note);
   }
 
   @override

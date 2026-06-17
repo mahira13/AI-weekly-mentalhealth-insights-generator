@@ -25,30 +25,30 @@ class SaveEntry extends JournalEvent {
 
 /// Fired when the user changes slider values in the journal form.
 class UpdateDraftField extends JournalEvent {
-  final double? racingThoughts;
-  final double? suspicion;
-  final double? lowMotivation;
-  final double? socialWithdrawal;
-  final double? sleepHours;
+  final double? positiveSymptom;
+  final double? negativeSymptom;
+  final double? sleepQuality;
   final double? stressLevel;
+  final double? socialEnergy;
+  final String? note;
 
   const UpdateDraftField({
-    this.racingThoughts,
-    this.suspicion,
-    this.lowMotivation,
-    this.socialWithdrawal,
-    this.sleepHours,
+    this.positiveSymptom,
+    this.negativeSymptom,
+    this.sleepQuality,
     this.stressLevel,
+    this.socialEnergy,
+    this.note,
   });
 
   @override
   List<Object?> get props => [
-        racingThoughts,
-        suspicion,
-        lowMotivation,
-        socialWithdrawal,
-        sleepHours,
+        positiveSymptom,
+        negativeSymptom,
+        sleepQuality,
         stressLevel,
+        socialEnergy,
+        note,
       ];
 }
 

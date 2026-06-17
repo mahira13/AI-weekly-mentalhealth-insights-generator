@@ -13,36 +13,36 @@ void main() {
       entry = JournalEntry(
         id: 'test-id',
         date: testDate,
-        racingThoughts: 3.0,
-        suspicion: 2.0,
-        lowMotivation: 5.0,
-        socialWithdrawal: 4.0,
-        sleepHours: 6.5,
+        positiveSymptom: 3.0,
+        negativeSymptom: 5.0,
+        sleepQuality: 6.5,
         stressLevel: 7.0,
+        socialEnergy: 8.0,
+        note: 'Calmer by evening',
       );
     });
 
     test('copyWith creates a new entry with updated fields', () {
-      final updated = entry.copyWith(racingThoughts: 8.0, stressLevel: 9.0);
+      final updated = entry.copyWith(positiveSymptom: 8.0, stressLevel: 9.0);
 
-      expect(updated.racingThoughts, 8.0);
+      expect(updated.positiveSymptom, 8.0);
       expect(updated.stressLevel, 9.0);
       // unchanged fields preserved
       expect(updated.id, entry.id);
-      expect(updated.suspicion, entry.suspicion);
-      expect(updated.sleepHours, entry.sleepHours);
+      expect(updated.negativeSymptom, entry.negativeSymptom);
+      expect(updated.sleepQuality, entry.sleepQuality);
     });
 
     test('two entries with same data are equal (Equatable)', () {
       final other = JournalEntry(
         id: 'test-id',
         date: testDate,
-        racingThoughts: 3.0,
-        suspicion: 2.0,
-        lowMotivation: 5.0,
-        socialWithdrawal: 4.0,
-        sleepHours: 6.5,
+        positiveSymptom: 3.0,
+        negativeSymptom: 5.0,
+        sleepQuality: 6.5,
         stressLevel: 7.0,
+        socialEnergy: 8.0,
+        note: 'Calmer by evening',
       );
       expect(entry, equals(other));
     });

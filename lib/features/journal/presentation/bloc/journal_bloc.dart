@@ -72,12 +72,12 @@ class JournalBloc extends Bloc<JournalEvent, JournalState> {
     if (current is! JournalLoaded) return;
 
     final updated = current.draft.copyWith(
-      racingThoughts: event.racingThoughts,
-      suspicion: event.suspicion,
-      lowMotivation: event.lowMotivation,
-      socialWithdrawal: event.socialWithdrawal,
-      sleepHours: event.sleepHours,
+      positiveSymptom: event.positiveSymptom,
+      negativeSymptom: event.negativeSymptom,
+      sleepQuality: event.sleepQuality,
       stressLevel: event.stressLevel,
+      socialEnergy: event.socialEnergy,
+      note: event.note,
     );
     emit(current.copyWith(draft: updated, entrySaved: false));
   }
@@ -93,12 +93,12 @@ class JournalBloc extends Bloc<JournalEvent, JournalState> {
     return JournalEntry(
       id: _uuid.v4(),
       date: DateTime.now(),
-      racingThoughts: draft.racingThoughts,
-      suspicion: draft.suspicion,
-      lowMotivation: draft.lowMotivation,
-      socialWithdrawal: draft.socialWithdrawal,
-      sleepHours: draft.sleepHours,
+      positiveSymptom: draft.positiveSymptom,
+      negativeSymptom: draft.negativeSymptom,
+      sleepQuality: draft.sleepQuality,
       stressLevel: draft.stressLevel,
+      socialEnergy: draft.socialEnergy,
+      note: draft.note.trim(),
     );
   }
 }

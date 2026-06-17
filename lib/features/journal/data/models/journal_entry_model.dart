@@ -7,7 +7,7 @@ part 'journal_entry_model.g.dart';
 
 /// Hive-backed data model for [JournalEntry].
 ///
-/// Run `flutter pub run build_runner build` to generate
+/// Run `dart run build_runner build --delete-conflicting-outputs` to generate
 /// `journal_entry_model.g.dart` containing the type adapter.
 @HiveType(typeId: AppConstants.journalEntryTypeId)
 class JournalEntryModel extends HiveObject {
@@ -18,32 +18,32 @@ class JournalEntryModel extends HiveObject {
   final DateTime date;
 
   @HiveField(2)
-  final double racingThoughts;
+  final double positiveSymptom;
 
   @HiveField(3)
-  final double suspicion;
+  final double negativeSymptom;
 
   @HiveField(4)
-  final double lowMotivation;
+  final double sleepQuality;
 
   @HiveField(5)
-  final double socialWithdrawal;
+  final double stressLevel;
 
   @HiveField(6)
-  final double sleepHours;
+  final double socialEnergy;
 
   @HiveField(7)
-  final double stressLevel;
+  final String note;
 
   JournalEntryModel({
     required this.id,
     required this.date,
-    required this.racingThoughts,
-    required this.suspicion,
-    required this.lowMotivation,
-    required this.socialWithdrawal,
-    required this.sleepHours,
+    required this.positiveSymptom,
+    required this.negativeSymptom,
+    required this.sleepQuality,
     required this.stressLevel,
+    required this.socialEnergy,
+    this.note = '',
   });
 
   /// Converts a domain [JournalEntry] to its Hive model counterpart.
@@ -51,12 +51,12 @@ class JournalEntryModel extends HiveObject {
     return JournalEntryModel(
       id: entry.id,
       date: entry.date,
-      racingThoughts: entry.racingThoughts,
-      suspicion: entry.suspicion,
-      lowMotivation: entry.lowMotivation,
-      socialWithdrawal: entry.socialWithdrawal,
-      sleepHours: entry.sleepHours,
+      positiveSymptom: entry.positiveSymptom,
+      negativeSymptom: entry.negativeSymptom,
+      sleepQuality: entry.sleepQuality,
       stressLevel: entry.stressLevel,
+      socialEnergy: entry.socialEnergy,
+      note: entry.note,
     );
   }
 
@@ -65,12 +65,12 @@ class JournalEntryModel extends HiveObject {
     return JournalEntry(
       id: id,
       date: date,
-      racingThoughts: racingThoughts,
-      suspicion: suspicion,
-      lowMotivation: lowMotivation,
-      socialWithdrawal: socialWithdrawal,
-      sleepHours: sleepHours,
+      positiveSymptom: positiveSymptom,
+      negativeSymptom: negativeSymptom,
+      sleepQuality: sleepQuality,
       stressLevel: stressLevel,
+      socialEnergy: socialEnergy,
+      note: note,
     );
   }
 }

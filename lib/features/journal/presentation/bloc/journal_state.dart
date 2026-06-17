@@ -4,48 +4,48 @@ import '../../../../core/error/failures.dart';
 
 /// Encapsulates the mutable draft being edited before saving.
 class JournalDraft extends Equatable {
-  final double racingThoughts;
-  final double suspicion;
-  final double lowMotivation;
-  final double socialWithdrawal;
-  final double sleepHours;
+  final double positiveSymptom;
+  final double negativeSymptom;
+  final double sleepQuality;
   final double stressLevel;
+  final double socialEnergy;
+  final String note;
 
   const JournalDraft({
-    this.racingThoughts = 0,
-    this.suspicion = 0,
-    this.lowMotivation = 0,
-    this.socialWithdrawal = 0,
-    this.sleepHours = 7,
+    this.positiveSymptom = 0,
+    this.negativeSymptom = 0,
+    this.sleepQuality = 5,
     this.stressLevel = 0,
+    this.socialEnergy = 5,
+    this.note = '',
   });
 
   JournalDraft copyWith({
-    double? racingThoughts,
-    double? suspicion,
-    double? lowMotivation,
-    double? socialWithdrawal,
-    double? sleepHours,
+    double? positiveSymptom,
+    double? negativeSymptom,
+    double? sleepQuality,
     double? stressLevel,
+    double? socialEnergy,
+    String? note,
   }) {
     return JournalDraft(
-      racingThoughts: racingThoughts ?? this.racingThoughts,
-      suspicion: suspicion ?? this.suspicion,
-      lowMotivation: lowMotivation ?? this.lowMotivation,
-      socialWithdrawal: socialWithdrawal ?? this.socialWithdrawal,
-      sleepHours: sleepHours ?? this.sleepHours,
+      positiveSymptom: positiveSymptom ?? this.positiveSymptom,
+      negativeSymptom: negativeSymptom ?? this.negativeSymptom,
+      sleepQuality: sleepQuality ?? this.sleepQuality,
       stressLevel: stressLevel ?? this.stressLevel,
+      socialEnergy: socialEnergy ?? this.socialEnergy,
+      note: note ?? this.note,
     );
   }
 
   @override
   List<Object?> get props => [
-        racingThoughts,
-        suspicion,
-        lowMotivation,
-        socialWithdrawal,
-        sleepHours,
+        positiveSymptom,
+        negativeSymptom,
+        sleepQuality,
         stressLevel,
+        socialEnergy,
+        note,
       ];
 }
 
