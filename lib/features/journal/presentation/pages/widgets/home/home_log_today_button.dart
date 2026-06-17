@@ -26,9 +26,7 @@ class HomeLogTodayButton extends StatelessWidget {
         icon: Icon(
           hasLoggedToday ? Icons.check : Icons.edit_note_rounded,
         ),
-        label: Text(hasLoggedToday
-            ? 'Edit Today\'s Log'
-            : 'Log Today'),
+        label: Text(hasLoggedToday ? 'Edit Today\'s Log' : 'Log Today'),
         onPressed: () {
           final bloc = context.read<JournalBloc>();
 
@@ -47,7 +45,7 @@ class HomeLogTodayButton extends StatelessWidget {
             );
           }
 
-          context.push(AppRoutes.journal, extra: bloc);
+          context.push(AppRoutes.journal);
         },
       ),
     );

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/di/injection_container.dart';
 import '../../domain/entities/journal_entry.dart';
 import '../bloc/journal_bloc.dart';
-import '../bloc/journal_event.dart';
 import '../bloc/journal_state.dart';
 import 'widgets/home/home_greeting_header.dart';
 import 'widgets/home/home_log_today_button.dart';
@@ -17,10 +15,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => sl<JournalBloc>()..add(const LoadWeeklyEntries()),
-      child: const _HomeView(),
-    );
+    return const _HomeView();
   }
 }
 
