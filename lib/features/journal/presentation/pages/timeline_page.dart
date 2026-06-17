@@ -92,15 +92,16 @@ class _TimelineChart extends StatelessWidget {
 // ─────────────────────────────────────────────────────────────────────────────
 
 class _LegendRow extends StatelessWidget {
+  const _LegendRow();
+
   @override
   Widget build(BuildContext context) {
     const items = [
-      _LegendItem('Racing Thoughts', AppTheme.positiveSymptom),
-      _LegendItem('Suspicion', AppTheme.danger),
-      _LegendItem('Low Motivation', AppTheme.negativeSymptom),
-      _LegendItem('Social Withdrawal', AppTheme.socialColor),
-      _LegendItem('Sleep (h)', AppTheme.sleepColor),
+      _LegendItem('Positive Symptom', AppTheme.positiveSymptom),
+      _LegendItem('Negative Symptom', AppTheme.negativeSymptom),
+      _LegendItem('Sleep', AppTheme.sleepColor),
       _LegendItem('Stress', AppTheme.stressColor),
+      _LegendItem('Social Energy', AppTheme.socialColor),
     ];
 
     return Wrap(
@@ -179,7 +180,7 @@ class _LineChartWidget extends StatelessWidget {
     return LineChart(
       LineChartData(
         minY: 0,
-        maxY: 12,
+        maxY: 10,
         gridData: FlGridData(
           show: true,
           getDrawingHorizontalLine: (_) =>
@@ -237,21 +238,16 @@ class _LineChartWidget extends StatelessWidget {
         ),
         lineBarsData: [
           _line(
-            toSpots((e) => e.racingThoughts),
+            toSpots((e) => e.positiveSymptom),
             AppTheme.positiveSymptom,
           ),
-          _line(toSpots((e) => e.suspicion), AppTheme.danger),
           _line(
-            toSpots((e) => e.lowMotivation),
+            toSpots((e) => e.negativeSymptom),
             AppTheme.negativeSymptom,
           ),
-          _line(
-            toSpots((e) => e.socialWithdrawal),
-            AppTheme.socialColor,
-            dashed: true,
-          ),
-          _line(toSpots((e) => e.sleepHours), AppTheme.sleepColor),
+          _line(toSpots((e) => e.sleepQuality), AppTheme.sleepColor),
           _line(toSpots((e) => e.stressLevel), AppTheme.stressColor),
+          _line(toSpots((e) => e.socialEnergy), AppTheme.socialColor),
         ],
       ),
     );
@@ -311,31 +307,36 @@ class _EntryCard extends StatelessWidget {
               runSpacing: 4,
               children: [
                 _Chip(
-                  'RT: ${entry.racingThoughts.toStringAsFixed(1)}',
+                  'Positive: ${entry.positiveSymptom.toStringAsFixed(1)}',
                   AppTheme.positiveSymptom,
                 ),
                 _Chip(
-                  'Sus: ${entry.suspicion.toStringAsFixed(1)}',
-                  AppTheme.danger,
-                ),
-                _Chip(
-                  'Mot: ${entry.lowMotivation.toStringAsFixed(1)}',
+                  'Negative: ${entry.negativeSymptom.toStringAsFixed(1)}',
                   AppTheme.negativeSymptom,
                 ),
                 _Chip(
-                  'SW: ${entry.socialWithdrawal.toStringAsFixed(1)}',
-                  AppTheme.socialColor,
-                ),
-                _Chip(
-                  'Sleep: ${entry.sleepHours.toStringAsFixed(1)}h',
+                  'Sleep: ${entry.sleepQuality.toStringAsFixed(1)}',
                   AppTheme.sleepColor,
                 ),
                 _Chip(
                   'Stress: ${entry.stressLevel.toStringAsFixed(1)}',
                   AppTheme.stressColor,
                 ),
+                _Chip(
+                  'Social: ${entry.socialEnergy.toStringAsFixed(1)}',
+                  AppTheme.socialColor,
+                ),
               ],
             ),
+            if (entry.note.isNotEmpty) ...[
+              const SizedBox(height: 10),
+              Text(
+                entry.note,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: AppTheme.textSecondary,
+                    ),
+              ),
+            ],
           ],
         ),
       ),

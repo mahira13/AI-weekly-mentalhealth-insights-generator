@@ -9,7 +9,7 @@ import '../../../../core/theme/app_theme.dart';
 import '../bloc/journal_bloc.dart';
 import '../bloc/journal_event.dart';
 import '../bloc/journal_state.dart';
-import 'widgets/journal_form.dart';
+import 'widgets/journal/journal_form.dart';
 
 class JournalPage extends StatelessWidget {
   const JournalPage({super.key});

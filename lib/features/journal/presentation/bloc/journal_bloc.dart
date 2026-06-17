@@ -4,6 +4,7 @@ import 'package:uuid/uuid.dart';
 import '../../domain/entities/journal_entry.dart';
 import '../../domain/usecases/get_weekly_entries.dart';
 import '../../domain/usecases/save_journal_entry.dart';
+import '../../domain/usecases/seed_demo_data.dart' as usecases;
 import '../../../../core/error/failures.dart';
 import 'journal_event.dart';
 import 'journal_state.dart';
@@ -11,17 +12,20 @@ import 'journal_state.dart';
 class JournalBloc extends Bloc<JournalEvent, JournalState> {
   final SaveJournalEntry saveJournalEntry;
   final GetWeeklyEntries getWeeklyEntries;
+  final usecases.SeedDemoData seedDemoData;
 
   static const _uuid = Uuid();
 
   JournalBloc({
     required this.saveJournalEntry,
     required this.getWeeklyEntries,
+    required this.seedDemoData,
   }) : super(const JournalInitial()) {
     on<LoadWeeklyEntries>(_onLoadWeeklyEntries);
     on<SaveEntry>(_onSaveEntry);
     on<UpdateDraftField>(_onUpdateDraftField);
     on<ResetDraft>(_onResetDraft);
+    on<SeedDemoData>(_onSeedDemoData);
   }
 
   // ── Handlers ──────────────────────────────────────────────────────────────
@@ -86,6 +90,25 @@ class JournalBloc extends Bloc<JournalEvent, JournalState> {
     final current = state;
     if (current is! JournalLoaded) return;
     emit(current.copyWith(draft: const JournalDraft(), entrySaved: false));
+  }
+
+  Future<void> _onSeedDemoData(
+    SeedDemoData event,
+    Emitter<JournalState> emit,
+  ) async {
+    final current = state;
+    if (current is! JournalLoaded) return;
+
+    emit(const JournalLoading());
+    try {
+      await seedDemoData();
+      final updated = await getWeeklyEntries();
+      emit(JournalLoaded(weeklyEntries: updated));
+    } on CacheFailure catch (f) {
+      emit(JournalError(f));
+    } catch (e) {
+      emit(JournalError(CacheFailure(e.toString())));
+    }
   }
 
   /// Convenience method to build a [JournalEntry] from the current draft.

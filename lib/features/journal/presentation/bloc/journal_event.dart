@@ -56,3 +56,8 @@ class UpdateDraftField extends JournalEvent {
 class ResetDraft extends JournalEvent {
   const ResetDraft();
 }
+
+/// Fired to seed 7 days of demo data.
+class SeedDemoData extends JournalEvent {
+  const SeedDemoData();
+}

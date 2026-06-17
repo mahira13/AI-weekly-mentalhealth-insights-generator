@@ -13,6 +13,7 @@ import '../../features/journal/data/repositories/journal_repository_impl.dart';
 import '../../features/journal/domain/repositories/journal_repository.dart';
 import '../../features/journal/domain/usecases/get_weekly_entries.dart';
 import '../../features/journal/domain/usecases/save_journal_entry.dart';
+import '../../features/journal/domain/usecases/seed_demo_data.dart';
 import '../../features/journal/presentation/bloc/journal_bloc.dart';
 import '../utils/constants.dart';
 
@@ -37,8 +38,8 @@ Future<void> initDependencies() async {
     () => JournalLocalDataSourceImpl(box: sl()),
   );
 
-  final aiProvider =
-      dotenv.maybeGet(AppConstants.aiProviderEnv) ?? AppConstants.providerOpenAi;
+  final aiProvider = dotenv.maybeGet(AppConstants.aiProviderEnv) ??
+      AppConstants.providerOpenAi;
   final openAiKey = dotenv.maybeGet(AppConstants.openAiApiKeyEnv) ?? '';
   final claudeKey = dotenv.maybeGet(AppConstants.claudeApiKeyEnv) ?? '';
 
@@ -61,12 +62,14 @@ Future<void> initDependencies() async {
   // ── Use cases ─────────────────────────────────────────────────────────────
   sl.registerLazySingleton(() => SaveJournalEntry(sl()));
   sl.registerLazySingleton(() => GetWeeklyEntries(sl()));
+  sl.registerLazySingleton(() => SeedDemoData(sl()));
   sl.registerLazySingleton(() => GenerateWeeklyInsights(sl()));
 
   // ── BLoCs (registered as factories so each widget tree gets a fresh instance)
   sl.registerFactory(() => JournalBloc(
         saveJournalEntry: sl(),
         getWeeklyEntries: sl(),
+        seedDemoData: sl(),
       ));
   sl.registerFactory(() => InsightsBloc(generateWeeklyInsights: sl()));
 }

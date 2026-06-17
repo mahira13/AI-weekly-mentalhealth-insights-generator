@@ -16,4 +16,7 @@ abstract class JournalRepository {
 
   /// Deletes the entry identified by [id].
   Future<void> deleteEntry(String id);
+
+  /// Seeds 7 days of demo data for testing and demonstrations.
+  Future<void> seedDemoData();
 }

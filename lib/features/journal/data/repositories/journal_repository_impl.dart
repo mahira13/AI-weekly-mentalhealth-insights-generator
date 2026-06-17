@@ -56,4 +56,15 @@ class JournalRepositoryImpl implements JournalRepository {
       throw CacheFailure('Unexpected error deleting entry: $e');
     }
   }
+
+  @override
+  Future<void> seedDemoData() async {
+    try {
+      await localDataSource.seedDemoData();
+    } on CacheFailure {
+      rethrow;
+    } catch (e) {
+      throw CacheFailure('Unexpected error seeding demo data: $e');
+    }
+  }
 }
