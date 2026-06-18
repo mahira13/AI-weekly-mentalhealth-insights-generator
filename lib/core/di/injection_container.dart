@@ -3,6 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../features/insights/data/datasources/insights_local_datasource.dart';
 import '../../features/insights/data/services/insights_model_setup_service.dart';
+import '../../features/insights/data/services/pdf_export_service.dart';
 import '../../features/insights/data/repositories/insights_repository_impl.dart';
 import '../../features/insights/domain/repositories/insights_repository.dart';
 import '../../features/insights/domain/usecases/generate_weekly_insights.dart';
@@ -37,6 +38,7 @@ Future<void> initDependencies() async {
   sl.registerLazySingleton<InsightsModelSetupService>(
     () => InsightsModelSetupService(box: appSettingsBox),
   );
+  sl.registerLazySingleton<PdfExportService>(() => const PdfExportService());
 
   // ── Data sources ─────────────────────────────────────────────────────────
   sl.registerLazySingleton<JournalLocalDataSource>(
