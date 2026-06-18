@@ -17,25 +17,13 @@ A Flutter app for private mental health journaling, 7-day symptom tracking, offl
 
 ## Screenshots
 
-### Home
-
-![Home screen](screenshots/home.png)
-
-### Daily Journal
-
-![Daily journal screen](screenshots/journal.png)
-
-### 7-Day Timeline
-
-![7-day timeline screen](screenshots/timeline.png)
-
-### Weekly Insights
-
-![Weekly insights screen](screenshots/insights.png)
-
-### PDF Preview
-
-![PDF preview screen](screenshots/pdf-preview.png)
+<div>
+  <img src="screenshots/home.png" width="220" />
+  <img src="screenshots/journal.png" width="220" />
+  <img src="screenshots/timeline.png" width="220" />
+  <img src="screenshots/insights.png" width="220" />
+  <img src="screenshots/pdf-preview.png" width="220" />
+</div>
 
 ---
 
