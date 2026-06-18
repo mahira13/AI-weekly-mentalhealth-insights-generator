@@ -10,6 +10,10 @@ import '../../features/journal/presentation/bloc/journal_event.dart';
 import '../../features/journal/presentation/pages/journal_page.dart';
 import '../../features/journal/presentation/pages/timeline_page.dart';
 
+final GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<ScaffoldMessengerState> appScaffoldMessengerKey =
+    GlobalKey<ScaffoldMessengerState>();
+
 /// Named route paths used throughout the app.
 class AppRoutes {
   AppRoutes._();
@@ -22,6 +26,7 @@ class AppRoutes {
 
 /// Configures [GoRouter] with all application routes.
 final GoRouter appRouter = GoRouter(
+  navigatorKey: appNavigatorKey,
   initialLocation: AppRoutes.home,
   debugLogDiagnostics: false,
   routes: [
@@ -48,13 +53,13 @@ final GoRouter appRouter = GoRouter(
           pageBuilder: (BuildContext context, GoRouterState state) =>
               const NoTransitionPage(child: TimelinePage()),
         ),
+        GoRoute(
+          path: AppRoutes.insights,
+          name: 'insights',
+          pageBuilder: (BuildContext context, GoRouterState state) =>
+              const NoTransitionPage(child: InsightsPage()),
+        ),
       ],
-    ),
-    GoRoute(
-      path: AppRoutes.insights,
-      name: 'insights',
-      pageBuilder: (BuildContext context, GoRouterState state) =>
-          const NoTransitionPage(child: InsightsPage()),
     ),
   ],
   errorBuilder: (BuildContext context, GoRouterState state) => Scaffold(

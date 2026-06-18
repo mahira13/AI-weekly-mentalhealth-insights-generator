@@ -24,11 +24,10 @@ dependencies:
   # Charts
   fl_chart: ^0.68.0
 
-  # HTTP client
-  http: ^1.2.1
-
-  # Environment variables
-  flutter_dotenv: ^5.1.0
+  # On-device AI
+  flutter_gemma: ^1.0.0-rc.1
+  flutter_gemma_litertlm: ^1.0.0-rc.1
+  flutter_gemma_mediapipe: ^1.0.0-rc.1
 
   # Dependency injection
   get_it: ^7.6.7
@@ -39,8 +38,6 @@ dependencies:
 
 flutter:
   uses-material-design: true
-  assets:
-    - .env
 
 dev_dependencies:
   flutter_test:

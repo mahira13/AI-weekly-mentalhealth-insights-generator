@@ -8,25 +8,17 @@ class AppConstants {
   // ── Hive type IDs ──────────────────────────────────────────────────────────
   static const int journalEntryTypeId = 0;
 
-  // ── Environment variable keys ───────────────────────────────────────────────
-  static const String openAiApiKeyEnv = 'OPENAI_API_KEY';
-  static const String claudeApiKeyEnv = 'CLAUDE_API_KEY';
-  static const String aiProviderEnv = 'AI_PROVIDER';
+  // ── App settings storage ───────────────────────────────────────────────────
+  static const String appSettingsBoxName = 'app_settings';
+  static const String insightsModelConsentKey = 'insights_model_consent';
 
-  // ── AI provider identifiers ─────────────────────────────────────────────────
-  static const String providerOpenAi = 'openai';
-  static const String providerClaude = 'claude';
-
-  // ── OpenAI endpoint ─────────────────────────────────────────────────────────
-  static const String openAiBaseUrl = 'https://api.openai.com/v1';
-  static const String openAiChatEndpoint = '$openAiBaseUrl/chat/completions';
-  static const String openAiModel = 'gpt-4o-mini';
-
-  // ── Claude endpoint ─────────────────────────────────────────────────────────
-  static const String claudeBaseUrl = 'https://api.anthropic.com/v1';
-  static const String claudeMessagesEndpoint = '$claudeBaseUrl/messages';
-  static const String claudeModel = 'claude-3-haiku-20240307';
-  static const String claudeVersion = '2023-06-01';
+  // ── On-device AI ────────────────────────────────────────────────────────────
+  static const String gemmaModelFileName = 'qwen3_0_6b_mixed_int4.litertlm';
+  static const String gemmaModelDownloadUrl =
+      'https://huggingface.co/litert-community/Qwen3-0.6B/resolve/main/qwen3_0_6b_mixed_int4.litertlm?download=true';
+  static const String gemmaModelDisplayName = 'Qwen3 0.6B';
+  static const int gemmaModelApproxSizeMb = 498;
+  static const int gemmaInsightsMaxTokens = 2048;
 
   // ── Journal slider ranges ────────────────────────────────────────────────────
   static const double sliderMin = 0;

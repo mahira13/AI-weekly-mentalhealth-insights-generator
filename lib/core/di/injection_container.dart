@@ -1,8 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import '../../features/insights/data/datasources/insights_remote_datasource.dart';
+import '../../features/insights/data/datasources/insights_local_datasource.dart';
+import '../../features/insights/data/services/insights_model_setup_service.dart';
 import '../../features/insights/data/repositories/insights_repository_impl.dart';
 import '../../features/insights/domain/repositories/insights_repository.dart';
 import '../../features/insights/domain/usecases/generate_weekly_insights.dart';
@@ -29,26 +29,22 @@ Future<void> initDependencies() async {
   Hive.registerAdapter(JournalEntryModelAdapter());
   final journalBox =
       await Hive.openBox<JournalEntryModel>(AppConstants.journalBoxName);
+  final appSettingsBox =
+      await Hive.openBox<dynamic>(AppConstants.appSettingsBoxName);
 
   // ── External ─────────────────────────────────────────────────────────────
   sl.registerLazySingleton<Box<JournalEntryModel>>(() => journalBox);
+  sl.registerLazySingleton<InsightsModelSetupService>(
+    () => InsightsModelSetupService(box: appSettingsBox),
+  );
 
   // ── Data sources ─────────────────────────────────────────────────────────
   sl.registerLazySingleton<JournalLocalDataSource>(
     () => JournalLocalDataSourceImpl(box: sl()),
   );
 
-  final aiProvider = dotenv.maybeGet(AppConstants.aiProviderEnv) ??
-      AppConstants.providerOpenAi;
-  final openAiKey = dotenv.maybeGet(AppConstants.openAiApiKeyEnv) ?? '';
-  final claudeKey = dotenv.maybeGet(AppConstants.claudeApiKeyEnv) ?? '';
-
-  sl.registerLazySingleton<InsightsRemoteDataSource>(
-    () => InsightsRemoteDataSourceImpl(
-      aiProvider: aiProvider,
-      openAiApiKey: openAiKey,
-      claudeApiKey: claudeKey,
-    ),
+  sl.registerLazySingleton<InsightsLocalDataSource>(
+    () => InsightsLocalDataSourceImpl(modelSetupService: sl()),
   );
 
   // ── Repositories ─────────────────────────────────────────────────────────
@@ -56,7 +52,7 @@ Future<void> initDependencies() async {
     () => JournalRepositoryImpl(localDataSource: sl()),
   );
   sl.registerLazySingleton<InsightsRepository>(
-    () => InsightsRepositoryImpl(remoteDataSource: sl()),
+    () => InsightsRepositoryImpl(localDataSource: sl()),
   );
 
   // ── Use cases ─────────────────────────────────────────────────────────────
