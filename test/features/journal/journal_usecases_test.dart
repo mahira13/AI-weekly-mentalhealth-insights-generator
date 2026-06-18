@@ -8,6 +8,8 @@ import 'package:ai_mental_health_insights/features/journal/domain/usecases/save_
 
 class _MockJournalRepository extends Mock implements JournalRepository {}
 
+class _FakeJournalEntry extends Fake implements JournalEntry {}
+
 void main() {
   late _MockJournalRepository mockRepo;
   late GetWeeklyEntries getWeeklyEntries;
@@ -17,13 +19,17 @@ void main() {
   final entry = JournalEntry(
     id: 'id-1',
     date: testDate,
-    racingThoughts: 2.0,
-    suspicion: 1.0,
-    lowMotivation: 3.0,
-    socialWithdrawal: 2.5,
-    sleepHours: 7.0,
+    positiveSymptom: 2.0,
+    negativeSymptom: 3.0,
+    sleepQuality: 7.0,
     stressLevel: 4.0,
+    socialEnergy: 6.0,
+    note: 'Felt more social today',
   );
+
+  setUpAll(() {
+    registerFallbackValue(_FakeJournalEntry());
+  });
 
   setUp(() {
     mockRepo = _MockJournalRepository();
@@ -33,8 +39,7 @@ void main() {
 
   group('GetWeeklyEntries', () {
     test('calls repository.getWeeklyEntries and returns entries', () async {
-      when(() => mockRepo.getWeeklyEntries())
-          .thenAnswer((_) async => [entry]);
+      when(() => mockRepo.getWeeklyEntries()).thenAnswer((_) async => [entry]);
 
       final result = await getWeeklyEntries();
 
